@@ -1,8 +1,9 @@
 # CMPE 283 Assignments for Spring 2021
+## Documentation for Assignment 1
 ### By Omri Levia and Sarvesh Upadhye
 (We both performed the assignment on our machines)
 
-## Documentation for Assignment 1
+
 ### Sarvesh's Contribution
 Me along with Omri worked over a zoom meting to complete the assignment. I started by creating an VIrtual Machine (Ubuntu 20.0) on VMware Workstation. I then  downloaded the Makefile and the .c file on my VM, and added structs and definations looking up in SDM for different capability region, added remaining msrs for each capability and also report_capability. For testing the code, i performed "make" command, to make the module, and the inserted the module using insmod (using .ko file created) in kernel, and tracking the "dmesg".
 I then created the git repo for the assignment, and i along with omri started pushing our code to the repo.
