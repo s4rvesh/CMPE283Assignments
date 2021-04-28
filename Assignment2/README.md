@@ -5,6 +5,8 @@
 
 
 ### Sarvesh's Contribution
+I worked on this assignment with Omri. Omri had forked the torvalds/linux repo, which i cloned. I first made an oldconfig for the kernel, and also build and installed updated kernel using make modules, make, make modules_install and make install. I then added leaf function to kvm_emulate_cpuid and also spent time reading about atomic variables while doing so. I also installed Virt-Manager and installed an Kali linux on it to test my code. I worked with Omri to add exit code counts in svm.c and catching it in cpuid.c leaf function.
+
 ### Omri's Contribution
 I worked with Sarvesh to review the steps on retrieving and building the linux kernel and discussed some steps to take to completing the assignment. In my dev environment, I forked and locally cloned the linux kernel repo began experimenting with editing KVM's cpuid.c file by adding a leaf function to kvm_emulate_cpuid. In parallel I spent some time practicing building the kernel and preparing a nested vm for testing. Initially I tried executing qemu-system_x86-64 commands but it proved very difficult so I used Virtual Machine Manager instead. I worked with Sarvesh to add exit measurement code in svm.c, and reporting information in the cpuid.c leaf function. 
 
