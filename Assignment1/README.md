@@ -6,6 +6,7 @@
 
 ### Sarvesh's Contribution
 Me along with Omri worked over a zoom meting to complete the assignment. I started by creating an VIrtual Machine (Ubuntu 20.0) on VMware Workstation. I then  downloaded the Makefile and the .c file on my VM, and added structs and definations looking up in SDM for different capability region, added remaining msrs for each capability and also report_capability. For testing the code, i performed "make" command, to make the module, and the inserted the module using insmod (using .ko file created) in kernel, and tracking the "dmesg".
+Initially there was error, as the address would show 0x0, as i had not enabled VTX feature on my workstation, but was solved once i enabled it).
 I then created the git repo for the assignment, and i along with omri started pushing our code to the repo.
 ### Omri's contribution
 I worked with Sarvesh in a zoom meeting to go over the assignment details and review the lecture recording about the assignment details. On my machine, I retrieved the starter .c file and makefile and began to add the four remaining structs and definitions for the different capability info regions. In the detect_vmx_features function, I added the four remaining reads of the msrs for each capability, and subsequently added the calls to report_capability. I then tried to perform testing by running make, then sudo insmod on the newly created .ko file. 
