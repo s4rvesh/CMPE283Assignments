@@ -26,5 +26,8 @@ I worked with Sarvesh to review the steps on retrieving and building the linux k
 13. Created testing code that calls cpu in inline assembly 
 14. Observed output and dmesg output
 
+![dmesg output after calling cpuid in nested vm](https://user-images.githubusercontent.com/34635965/116480252-d7ab6880-a835-11eb-9278-6f031e044f63.png)
+
+
 
 
