@@ -36,9 +36,11 @@ After a sudo reboot, we can see the count increase by another 500k exits about:
 ![Count after sudo reboot](https://user-images.githubusercontent.com/34635965/116606318-60351200-a8e5-11eb-958c-cbe356830be5.png)
 
 Waiting a few seconds and running the program again:
+
 ![Running program every few seconds](https://user-images.githubusercontent.com/34635965/116606393-85c21b80-a8e5-11eb-92e9-b6216eb0a92c.png)
 
 Running the program every few seconds shows that the number of exits seems to monotonically increase. Now I will open up a bunch of browsers, and try to generate many more exits by opening lots of applications:
+
 ![Opening up browser windows and a bunch of programs](https://user-images.githubusercontent.com/34635965/116606638-dc2f5a00-a8e5-11eb-90e4-4dd71a7e96fb.png)
 
 After opening up several browser windows and applications, the number of exits shot up by about 20k. 
