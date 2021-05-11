@@ -3,7 +3,21 @@
 ### By Omri Levia and Sarvesh Upadhye
 
 ### Omri's Contribution
-### Sarvesh's Contribution 
+In this assignment I worked with Sarvesh to set up the code in cpuid.c and svm.c. We examined the AMD SDM to view the 
+available exit codes, and printed out the supported KVM exit codes to see what the numbers associated with the exit name 
+were. After we added the new exit counters for each exit code, we added switch case statements in svm.c on the exit code. 
+Once all the code was added, I modified my test .c file to loop through all the exit codes and set eax to the new leaf function. 
+I then used this test to show the exit behavior with none or some network traffic. 
+### Sarvesh's Contribution
+
+### Question 2: Steps to reproduce
+1. Begin with forked linux repo, cloned on local machine
+2. Add cpuid.c 0x4ffffffe leaf, and define counters for supported kvm exit codes
+3. In leaf, use switch case to determine which counter to report 
+4. In svm.c use swtich case on exit_code to determine which counter to increment in exit_handler function
+5. After code is added, perform steps to rebuild the kernel:
+  5a. sudo make -j 4 modules --> sudo make -j 4 modules_install --> sudo make install --> sudo make --> sudo reboot
+6. Open nested vm and call cpuid with eax = 0x4ffffffe
 
 ### Question 3 Response
 Directly after bootup (from shutoff) of the nested VM (Debian within Ubuntu) there are around a million exits counted:
