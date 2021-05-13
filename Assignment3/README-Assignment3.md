@@ -8,7 +8,10 @@ available exit codes, and printed out the supported KVM exit codes to see what t
 were. After we added the new exit counters for each exit code, we added switch case statements in svm.c on the exit code. 
 Once all the code was added, I modified my test .c file to loop through all the exit codes and set eax to the new leaf function. 
 I then used this test to show the exit behavior with none or some network traffic. 
+
 ### Sarvesh's Contribution
+I worked with Omri to write the function needed in cpuid.c and svm.c. As we worked on AMD machine, we used AMD's SDM for the exitcodes and printing them along with their exit_names.
+We added counter for each exit_code in svm.c using switch case and incremented them. For testing, we created a C program to loop through all exit_codes and to set register eax values to leaf function. We used this testing program with generating some traffic.
 
 ### Question 2: Steps to reproduce
 1. Begin with forked linux repo, cloned on local machine

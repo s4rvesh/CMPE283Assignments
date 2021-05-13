@@ -71,11 +71,29 @@ Running the program every few seconds shows that the number of exits seems to mo
 
 After opening up several browser windows and applications, the number of exits shot up by about 20k.
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Documentation for Assignment 3
 ### By Omri Levia and Sarvesh Upadhye
 
 ### Omri's Contribution
-### Sarvesh's Contribution 
+In this assignment I worked with Sarvesh to set up the code in cpuid.c and svm.c. We examined the AMD SDM to view the 
+available exit codes, and printed out the supported KVM exit codes to see what the numbers associated with the exit name 
+were. After we added the new exit counters for each exit code, we added switch case statements in svm.c on the exit code. 
+Once all the code was added, I modified my test .c file to loop through all the exit codes and set eax to the new leaf function. 
+I then used this test to show the exit behavior with none or some network traffic. 
+
+### Sarvesh's Contribution
+I worked with Omri to write the function needed in cpuid.c and svm.c. As we worked on AMD machine, we used AMD's SDM for the exitcodes and printing them along with their exit_names.
+We added counter for each exit_code in svm.c using switch case and incremented them. For testing, we created a C program to loop through all exit_codes and to set register eax values to leaf function. We used this testing program with generating some traffic.
+
+### Question 2: Steps to reproduce
+1. Begin with forked linux repo, cloned on local machine
+2. Add cpuid.c 0x4ffffffe leaf, and define counters for supported kvm exit codes
+3. In leaf, use switch case to determine which counter to report 
+4. In svm.c use swtich case on exit_code to determine which counter to increment in exit_handler function
+5. After code is added, perform steps to rebuild the kernel:
+  5a. sudo make -j 4 modules --> sudo make -j 4 modules_install --> sudo make install --> sudo make --> sudo reboot
+6. Open nested vm and call cpuid with eax = 0x4ffffffe
 
 ### Question 3 Response
 Directly after bootup (from shutoff) of the nested VM (Debian within Ubuntu) there are around a million exits counted:
@@ -107,3 +125,44 @@ When it comes to the least number of exits, there are many codes which do not ha
 and exit code 81 (VMMCALL).
 
 The most frequent exit code was 124 with 847948 exits. Exit code 124 corresponds to VMEXIT_MSR. 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+## Documentation for Assignment 4
+### By Omri Levia and Sarvesh Upadhye
+
+### Omri's Contribution
+In this assignment, Sarvesh and I worked on determining the amd specific commandline arg to turn off nested paging upon insertion of the kvm module,
+e.g., npt=0. On my machine I ran the test code to produce the screenshots with npt off and on, both with some network traffic and without as well. 
+
+### Sarvesh's Contribution 
+I worked on this asignment with Omri. We determined AMD specific command line agruments to turn Off nested paging once inserted in KVM module.
+On machine then we ran test code with Nested Page Table on and off, with and without network traffic as well.
+
+### Question 2 Reponse
+
+#### Exits with EPT enabled
+![image](https://user-images.githubusercontent.com/34635965/117696969-cab44080-b176-11eb-9f86-5ea81d972fb0.png)
+![image](https://user-images.githubusercontent.com/34635965/117696990-d1db4e80-b176-11eb-84f7-70dfbb4c4a6c.png)
+
+
+
+#### Exits with EPT disabled
+![npt_off_1](https://user-images.githubusercontent.com/34635965/117696770-8a54c280-b176-11eb-8882-8e502c425e27.PNG)
+![npt_off_2](https://user-images.githubusercontent.com/34635965/117696777-8de84980-b176-11eb-8017-46be0f646ab9.PNG)
+
+#### Exits with EPT disabled and inducing network traffic 
+![ept_disabled_networktraffic](https://user-images.githubusercontent.com/34635965/117696836-9e98bf80-b176-11eb-9ab2-2a1d67bfb0fb.PNG)
+![ept_disabled_networktraffic_2](https://user-images.githubusercontent.com/34635965/117696851-a0fb1980-b176-11eb-81d9-f076283f49c2.PNG)
+
+### Question 3 Reponse
+Interestingly the default behavior on each nested vm boot shows that move to cr0 and move to cr3 get 5 and 0 exits respectively every time. 
+It is a little unexpected to see no exits on boot to move to cr3. Also the instruction that generated the most exits is VMCALL. 
+This instruction makes use of underlying services of the VM monitor, so it makes sense that this one is used and exited on frequently. 
+
+### Question 4 Reponse
+The exit counts with ept disabled compared with enabled show what we would expect. With ept disabled, 
+the exit code 0 and 3 shows significantly increased exits. This makes sense since each code corresponds to 
+the instruction for move to CR0 and move to CR3 respectively. With nested paging, the guest can perform its page table operations 
+with no intervention by the hypervisor, so when it is turned off, hypervisor intervention must resume. 

@@ -5,7 +5,10 @@
 ### Omri's Contribution
 In this assignment, Sarvesh and I worked on determining the amd specific commandline arg to turn off nested paging upon insertion of the kvm module,
 e.g., npt=0. On my machine I ran the test code to produce the screenshots with npt off and on, both with some network traffic and without as well. 
+
 ### Sarvesh's Contribution 
+I worked on this asignment with Omri. We determined AMD specific command line agruments to turn Off nested paging once inserted in KVM module.
+On machine then we ran test code with Nested Page Table on and off, with and without network traffic as well.
 
 ### Question 2 Reponse
 
